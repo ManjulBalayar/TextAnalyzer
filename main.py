@@ -7,8 +7,16 @@ from stats import basic_counts, top_k_words, word_length, sentence_statistics
 from rule_based import remove_stopwords, regex_tokenizer
 
 def main():
-	text = "Chapter 1 – The Boy Who Lived. Mr. and Mrs. Dursley, of number four, Privet Drive, were proud to say that they were perfectly normal, thank you very much. Mr. Dursley made drills. He was a big, beefy man with hardly any neck, although he did have a very large moustache. Mrs. Dursley was thin and blonde and had twice the usual amount of neck, which came in very useful as she spent so much of her time spying on the neighbours. The Dursleys had a small son called Dudley and in their opinion there was no finer boy anywhere. Mrs Dursley had a sister called Lily Potter. She and her husband James Potter had a son called Harry Potter. They lived far from the Dursleys and did not speak to them much. They did not get along. One day, a man appeared outside of the Dursleys house. He was tall, thin, and very old, judging by the silver of his hair and beard, which were both long enough to tuck into his belt. He was wearing long robes, a purple cloak that swept the ground, and highheeled, buckled boots. His blue eyes were light, bright, and sparkling behind half-moon spectacles and his nose was very long and crooked, as though it had been broken at least twice. This man's name was Albus Dumbledore."
-	
+	text = """On October 12, 2024, our team deployed the new API service for client billing. The rollout was mostly smooth, but a few users reported “timeout” errors when processing invoices. According to our logs, the average response time increased from 230ms to nearly 480ms between 3:00 PM and 5:00 PM.
+
+One engineer suggested that the issue might be related to an outdated dependency in the payment module. However, the fix requires coordination with the security team, and they won’t be available until next week.
+
+We also received an urgent customer email at support@fintrack.io
+ requesting a refund for a duplicate charge of $199.99. The customer shared a link to the failed invoice: https://fintrack.io/invoices/882133
+. We should probably escalate this case to Level-2 support.
+
+Overall, the team handled the situation well, but the incident highlights the need for better monitoring and automated alerts before major system changes."""	
+
 	print("Original text ---> ", text)	
 
 	print("")
@@ -30,9 +38,9 @@ def main():
 	print("Top K most frequent words: ", k_words)
 	longest_word, shortest_word, average_word_len = word_length(text)
 	print("Longest word: ", longest_word)
-	print("Shorted word: ", shortest_word)
+	print("Shortest word: ", shortest_word)
 	print("Average word length: ", average_word_len)
-	
+		
 	print("")
 
 	print("Sentence Statistics --->")
@@ -40,7 +48,7 @@ def main():
 	print("Longest sentence: ", longest_sentence)
 	print("Shortest sentence: ", shortest_sentence)
 	print("Average word count for all sentences: ", average_sentence_count)
-
+	
 	print("")
 	print("<<<<<<<<<<<<<<< STOP WORDS, REGEX, RULE-BASED  >>>>>>>>>>>>>>>")
 	
@@ -53,6 +61,25 @@ def main():
 	
 	regex_tokens = regex_tokenizer(text)
 	print("Regex tokens: ", regex_tokens)
+	
+	print("")
+
+	print("Updated basic counts after stop words removal (regex) --->")
+	regex_text = " ".join(regex_tokens)
+	num_chars, num_words, num_sent = basic_counts(regex_text)
+	print("Number of characters: ", num_chars)
+	print("Number of words: ", num_words)
+	print("Number of sentences: ", num_sent)
+	
+	print("Updated word statistics after stop words removal (regex) --->")
+	k = int(input("Enter your k value: "))
+	k_words = top_k_words(regex_text, k)
+	print("Top K most frequent words: ", k_words)
+	longest_word, shortest_word, average_word_len = word_length(regex_text)
+	print("Longest word: ", longest_word)
+	print("Shortest word: ", shortest_word)
+	print("Average word length: ", average_word_len)
+		
 
 if __name__ == "__main__":
 	main()
