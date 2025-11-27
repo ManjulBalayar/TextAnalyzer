@@ -72,25 +72,21 @@ def remove_stopwords(text):
 	return tokens
 
 def regex_tokenizer(text):
-	"""
-	Instead of a naive approach to tokenize words + removing stop words, I'll use `re` or regex for
-	more precise tokenizing and avoid blindly deleting punctuations and select valid tokens only from
-	the raw text.
-	"""
-	pattern = re.compile(
-    		r"""
-			[A-Za-z0-9_.+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+  # emails
-			|\$(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?		# money like $1200 or $199.99
-			|[0-9]+:[0-9]+					# time like 5:00
-			|[A-Za-z0-9'’]+					# words in general
-		""",
-		re.VERBOSE,				
-	)
-	matches = pattern.finditer(text)
-	cleaned = [m.group().lower() for m in matches]
-	tokens = [token for token in cleaned if token not in STOP_WORDS_SET]
-	return tokens
+    pattern = re.compile(
+        r"""
+            https?://[^\s]+                                # URLs (http/https)
+            |[A-Za-z0-9_.+-]+@[A-Za-z0-9-]+\.[A-Za-z0-9-.]+ # emails
+            |\$(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d+)?         # money like $1,200 or $199.99
+            |[0-9]{1,2}:[0-9]{2}                            # time like 5:00
+            |[A-Za-z0-9'’]+                                 # words in general
+        """,
+        re.VERBOSE,
+    )
 
+    matches = pattern.finditer(text)
+    cleaned = [m.group().lower() for m in matches]
+    tokens = [token for token in cleaned if token not in STOP_WORDS_SET]
+    return tokens
 
 
 
