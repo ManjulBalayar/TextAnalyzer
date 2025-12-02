@@ -1,6 +1,6 @@
-# TextAnalyzer
+# TextBench
 
-What is this? Well, it's a fun little project that gives you basic stats, sentiment analysis + topics using rule-based with regex tokenization, and semantic understandings of any text file that you give it using BERT. Ignore the `.swp` files, those are files generated from me using Vim. Yup, I'm cool like that. 
+What is this? Well, it's a fun little project that benchmarks and compares different NLP approaches for text analysis. I'm comparing rule-based techniques (regex tokenization), transformer models (BERT), and eventually LLMs to see how they stack up against each other for sentiment analysis, topic classification, and summarization. The goal is to understand the trade-offs between speed, accuracy, and complexity across these different methods, with visualizations to make it all clear. Ignore the `.swp` files, those are files generated from me using Vim. Yup, I'm cool like that. 
 
 ## `stats.py`
 
@@ -18,4 +18,9 @@ This file I focused more on rule-based techniques, primarily working with Python
 
 ## `semantics.py`
 
+This is where the BERT magic happens (still in progress). I'll be implementing transformer-based sentiment analysis, topic classification, and abstractive summarization using pre-trained BERT models. The plan is to compare these results directly against my rule-based approach to see where transformers shine and where simple regex is actually good enough. Spoiler: I'm expecting BERT to be more accurate but way slower, which is the whole point of this benchmark.
+
+## The Benchmark
+
+The endgame here is to create side-by-side comparisons with metrics like accuracy, F1-scores, and processing speed. Plus, I'll throw in some visualizations (word clouds, sentiment distributions, topic trends) to make the data actually interesting to look at. It's not just about building models—it's about understanding when to use which approach in the real world.
 
