@@ -206,6 +206,5 @@ def regex_topic_assigner(tokens):
 				topic_hits.append(topic)
 	if not topic_hits:
 		return None
-	print(topic_hits)
 	return max(set(topic_hits), key=topic_hits.count)
 	
